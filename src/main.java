@@ -5,7 +5,7 @@ import java.sql.ResultSet;
         public static void main(String[] args) {
             conexao con=new conexao();
 
-            //INSERINDO DADOS NA TABELA***********************************************
+            //INSERINDO DADOS NA TABELA CABEÇALHO***********************************************
            String sql="insert into cabecalho_registro_de_concreto(\n" +
                     "    relatorio , \n" +
                     "    obra ,\n" +
@@ -41,29 +41,81 @@ import java.sql.ResultSet;
                     "     'True'\n" +
                     ");\n";
 
-           conexao con1=new conexao();
-           int resultado= con1.executaSQL(sql);
+
+           int resultado= con.executaSQL(sql);
             if (resultado>0){
                 System.out.println("Dados inseridos com sucesso");
             }else{
                 System.out.println("Erro ao cadastrar");
             }
 
+            //SELEÇÃO DO CABEÇALHO*****************************************
+            conexao con1=new conexao();
             String sql1="select * from cabecalho_registro_de_concreto;";
-            ResultSet resultSet=con.executaBusca(sql1);
+            ResultSet resultSet=con1.executaBusca(sql1);
             try {
                 while (resultSet.next()){
                     int id=resultSet.getInt("id");
                     String relatorio=resultSet.getString("relatorio");
                     String obra=resultSet.getString("obra");
-                    System.out.println(" "+relatorio+" "+obra+".");
+                    System.out.println(id +" "+relatorio+" "+obra+".");
                 }
 
             }catch (Exception e){
                 e.printStackTrace();
             }
+            //REGISTRO DE MOLDAGENS**********************************************************
+            conexao con2=new conexao();
+            String sql2="insert into registro_de_concreto(\n" +
+                    "    \n" +
+                    "   \n" +
+                    "    \n" +
+                    "    relatorio ,\n" +
+                    "    placa_veiculo , \n" +
+                    "    nota_fiscal,\n" +
+                    "    hora_de_saida ,\n" +
+                    "    hora_de_chegada ,\n" +
+                    "    hora_de_inicio ,\n" +
+                    "    hora_de_fim,\n" +
+                    "    hora_de_moldagem ,\n" +
+                    "    slump_real ,\n" +
+                    "    volume ,\n" +
+                    "    volume_acumulado ,\n" +
+                    "    numero_de_cp ,\n" +
+                    "    temperatura_ambiente ,\n" +
+                    "    temperatura_concreto ,\n" +
+                    "    tipo_de_moldagem ,\n" +
+                    "    serie,\n" +
+                    "    quantidade_de_cp_7dias ,\n" +
+                    "    quantidade_de_cp_14dias ,\n" +
+                    "    quantidade_de_cp_28dias ,\n" +
+                    "    status_recebido \n" +
+                    "\n" +
+                    "\n" +
+                    ")values('03-0002-22','kkj-2566','35789','10:45','11:01','11:20','11:54','11:35','210','6.0','6.0','2','25.7','31,3','10X20','0001','0','0','2','TRUE');\n";
 
 
+            int resultado2= con2.executaSQL(sql2);
+            if (resultado2>0){
+                System.out.println("Dados inseridos com sucesso");
+            }else{
+                System.out.println("Erro ao cadastrar");
+            }
+
+            conexao con3=new conexao();
+            String sql3="select * from registro_de_concreto;";
+            ResultSet resultSet2=con3.executaBusca(sql3);
+            try {
+                while (resultSet2.next()){
+                    int id=resultSet2.getInt("id");
+                    String relatorio=resultSet2.getString("relatorio");
+                    String placa=resultSet2.getString("placa_veiculo");
+                    System.out.println(id +" "+relatorio+" "+placa+".");
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
         }
 
